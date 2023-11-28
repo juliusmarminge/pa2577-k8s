@@ -5,6 +5,11 @@ services:
       context: ./whisper
     ports:
       - 8000
+    environment:
+      - MYSQL_USER=wms-user
+      - MYSQL_PASSWORD=password
+      - MYSQL_HOST=wms-mysql
+      - MYSQL_DATABASE=wms
 
   wms-app:
     build:

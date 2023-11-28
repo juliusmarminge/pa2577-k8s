@@ -17,7 +17,7 @@ import { randomUUID } from "crypto";
  * For now we just match the statically one defined in the `mysql/` folder.
  */
 export const transcript = mysqlTable("transcript", {
-  id: varchar("id", { length: 20 }).primaryKey(),
+  id: varchar("id", { length: 36 }).primaryKey(),
   label: varchar("label", { length: 255 }).notNull(),
   processed: boolean("processed").notNull().default(false),
   transcript: text("transcript"),

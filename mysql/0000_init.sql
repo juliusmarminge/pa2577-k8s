@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `transcript` (
-    `id` int AUTO_INCREMENT NOT NULL,
+    `id` varchar(36) NOT NULL,
     `label` varchar(255) NOT NULL,
     `transcript` text,
     `processed` tinyint NOT NULL DEFAULT 0,

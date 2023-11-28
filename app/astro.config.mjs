@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import node from "@astrojs/node";
 
@@ -9,6 +9,6 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   output: "server",
   adapter: node({
-    mode: "standalone"
-  })
+    mode: "standalone",
+  }),
 });
