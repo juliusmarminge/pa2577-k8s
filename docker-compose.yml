@@ -1,0 +1,31 @@
+version: "3"
+services:
+  wms-whisper:
+    build:
+      context: ./whisper
+    ports:
+      - 8000
+
+  wms-app:
+    build:
+      context: ./app
+    ports:
+      - 3000:4321
+    environment:
+      - WORKER_URL=http://wms-whisper:8000
+      - MYSQL_USER=wms-user
+      - MYSQL_PASSWORD=password
+      - MYSQL_HOST=wms-mysql
+      - MYSQL_DATABASE=wms
+
+  wms-mysql:
+    image: mysql:8.2
+    environment:
+      - MYSQL_USER=wms-user
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=wms
+    ports:
+      - 3306
+    volumes:
+      - "./mysql:/docker-entrypoint-initdb.d"
