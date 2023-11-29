@@ -1,26 +1,23 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "target": "es2022",
+    "lib": ["dom", "dom.iterable", "es2022"],
     "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-
-    /* Strictness */
+    "skipLibCheck": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-
-    /* If NOT transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
     "noEmit": true,
-
-    /* If your code runs in the DOM: */
-    "lib": ["es2022", "dom", "dom.iterable"],
-    "jsx": "react-jsx"
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "~/*": ["./*"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.astro"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

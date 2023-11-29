@@ -9,7 +9,7 @@ Scaling is done by deploying multiple instances of it behind a load balancer.
 
 from asyncio import create_task, get_event_loop
 from concurrent.futures import ThreadPoolExecutor
-from os import remove as remove_file
+from os import remove as remove_file, path
 from typing import Annotated
 from fastapi import FastAPI, UploadFile, Form
 from src.db import MySQLConnection
@@ -20,11 +20,11 @@ MODEL = load_model("base")
 executor = ThreadPoolExecutor(max_workers=1)
 
 
-async def transcribe_async(transcript_id: str):
+async def transcribe_async(transcript_id: str, filename: str):
     """Wrapper around whisper.transcribe that runs it in a thread pool executor."""
     def _transcribe():
-        whisper_response = transcribe(MODEL, transcript_id)
-        remove_file(transcript_id)
+        whisper_response = transcribe(MODEL, filename)
+        remove_file(filename)
         return whisper_response
 
     result = await get_event_loop().run_in_executor(executor, _transcribe)
@@ -41,13 +41,14 @@ async def transcribe_async(transcript_id: str):
 @app.post("/jobs/enqueue")
 async def enqueue(file: Annotated[UploadFile, Form()], transcript_id: Annotated[str, Form()]):
     # Write file to disk cause whisper can't take in memory files
-    print(f"Writing {file.filename} to disk")
-    with open(transcript_id, "wb") as f:
+    filename = transcript_id + path.splitext(file.filename)[1]
+    print(f"Writing {filename} to disk")
+    with open(filename, "wb") as f:
         content = await file.read()
         f.write(content)
 
     # Start transcribing in the background
     print(f">>> Creating task for {file.filename}")
-    create_task(transcribe_async(transcript_id))
+    create_task(transcribe_async(transcript_id, filename))
 
     return {"status": "ok"}

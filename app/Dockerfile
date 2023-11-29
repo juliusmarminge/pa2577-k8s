@@ -1,4 +1,5 @@
-FROM --platform=linux/amd64 node:20-slim AS base
+FROM node:20-slim AS base
+# FROM --platform=linux/amd64 node:20-slim AS base
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -15,10 +16,7 @@ RUN npm run build
 
 FROM base AS runtime
 COPY --from=prod-deps /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
+COPY --from=build /app/.next ./.next
 
-ENV HOST=0.0.0.0
-ENV PORT=4321
-
-EXPOSE 4321
-CMD node ./dist/server/entry.mjs
+EXPOSE 3000
+CMD ["npm", "run", "start"]

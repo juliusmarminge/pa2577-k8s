@@ -1,8 +1,7 @@
-import type { APIRoute } from "astro";
 import { z } from "zod";
-import { createTranscript } from "../../db";
+import { createTranscript } from "../../../db";
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST = async (request: Request) => {
   const formData = await request.formData();
 
   const input = z
@@ -25,9 +24,6 @@ export const POST: APIRoute = async ({ request }) => {
   await fetch(new URL("/jobs/enqueue", process.env.WORKER_URL), {
     method: "POST",
     body: form,
-    // headers: {
-    //   "Content-Type": "multipart/form-data",
-    // },
   })
     .then((r) => r.json())
     .then(console.log)
