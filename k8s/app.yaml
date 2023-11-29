@@ -9,9 +9,9 @@ spec:
   selector:
     app: whisper-microservice
   ports:
-    - protocol: TCP
-      nodePort: 30001
-      port: 4321
+    - name: http
+      port: 80
+      targetPort: 4321
 
 ---
 apiVersion: apps/v1
