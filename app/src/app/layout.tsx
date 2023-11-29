@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-export const fontSans = Inter({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });

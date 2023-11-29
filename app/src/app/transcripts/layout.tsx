@@ -1,5 +1,7 @@
 import { getAllTranscripts } from "~/src/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function TranscriptsLayout(props: {
   children: React.ReactNode;
 }) {
