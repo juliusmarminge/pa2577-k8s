@@ -15,7 +15,7 @@ export default async function TranscriptsLayout(props: {
           available.
         </h1>
       )}
-      <div className="flex flex-col gap-4 w-full max-w-lg max-h-[90vh] overflow-y-scroll">
+      <div className="flex flex-col gap-4 w-full max-w-lg shrink-0 max-h-[90vh] overflow-y-scroll">
         {transcripts.map((t) => {
           return (
             <div
