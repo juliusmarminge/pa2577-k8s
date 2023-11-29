@@ -14,14 +14,17 @@ export default async function TranscriptsLayout(props: {
         </h1>
       )}
       <div className="flex flex-col gap-4 w-full max-w-lg max-h-[90vh] overflow-y-scroll">
-        {transcripts.map((post) => {
+        {transcripts.map((t) => {
           return (
-            <div className="rounded-lg p-4 flex flex-col gap-4 border bg-card shadow-sm">
+            <div
+              key={t.id}
+              className="rounded-lg p-4 flex flex-col gap-4 border bg-card shadow-sm"
+            >
               <div className="flex justify-between">
                 <h3 className="text-xl font-semibold leading-none tracking-tight">
-                  {post.label}
+                  {t.label}
                 </h3>
-                {!post.processed && (
+                {!t.processed && (
                   <div
                     className={
                       "inline-flex items-center rounded-full border px-2.5 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-amber-100 text-amber-800"
@@ -32,7 +35,7 @@ export default async function TranscriptsLayout(props: {
                 )}
               </div>
               <a
-                href={`/transcripts/${post.id}`}
+                href={`/transcripts/${t.id}`}
                 className="mr-auto block text-primary hover:text-primary/80 underline"
               >
                 Read more
