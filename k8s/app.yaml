@@ -39,9 +39,9 @@ spec:
             - name: WORKER_URL
               value: http://wms-whisper-service:8000
             - name: MYSQL_USER
-              value: root
+              value: wms
             - name: MYSQL_PASSWORD
-              value: password
+              value: wmspassword
             - name: MYSQL_HOST
               value: wms-mysql-service
             - name: MYSQL_DATABASE

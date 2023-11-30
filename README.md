@@ -29,3 +29,13 @@ The model used is the base whisper model, so transcriptions aren't 100% accurate
 ### Database
 
 Very basic MySQL database which stores the transcription results. It's not exposed to the outside world, and is only accessible from within the cluster.
+
+## Deployment
+
+The application is deployed using Kubernetes, and all configuration files are located in the [k8s](/k8s) directory.
+
+```bash
+# From project root
+kubectl apply -f k8s/mysql.yaml -f k8s/whisper.yaml -f k8s/app.yaml
+./db-init.sh
+```
